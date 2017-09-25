@@ -15,8 +15,25 @@
 #
 def triangle(a, b, c)
   # WRITE THIS CODE
+  arr = [a, b, c].sort
+  min = arr[0]
+  second = arr[1]
+  max = arr[2]
+
+  if (min + second) > max
+    if a == b and b == c and a == c
+      :equilateral
+    elsif a==b or b==c or a==c
+      :isosceles
+    else a != b and b!=c and a!=c
+      :scalene
+    end
+  else
+    raise TriangleError.new("New instances can be raised directly.")
+  end
 end
 
 # Error class used in part 2.  No need to change this code.
 class TriangleError < StandardError
+  # raise TriangleError.new("New instances can be raised directly.")
 end
