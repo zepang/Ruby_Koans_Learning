@@ -4,9 +4,29 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 #
 class DiceSet
   # code ...
-  arr = []
+  attr_accessor :values
+  attr_accessor :id
+
+  def initialize
+    @values = []
+    @id = 0
+  end
+
   def roll (num)
-    arr.length = num
+    @values = []
+    i = 1
+    if @id.eql?(num)
+      @id = 0
+      @values = []
+      return
+    else
+      @id = num
+
+      while i <= num
+        @values.push(i)
+        i += 1
+      end
+    end
   end
 end
 
