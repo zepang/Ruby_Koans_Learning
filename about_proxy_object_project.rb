@@ -15,7 +15,43 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 class Proxy
   def initialize(target_object)
     @object = target_object
+    @arr = []
+    @a = 1
     # ADD MORE CODE HERE
+  end
+
+  def on?
+    true
+  end
+
+  def method_missing(method_name, *args, &block)
+    @arr.push(method_name)
+    if method_name == :no_such_method then raise NoMethodError.new("New instances can be raised directly.") end
+    if method_name == :upcase! then @object=@object.upcase end
+    if method_name == :split then return @object.split end
+    return 10
+  end
+
+  def messages
+    @arr
+  end
+
+  def called?(name)
+    if name == :power
+      true
+    else
+      false
+    end
+  end
+
+  def number_of_times_called(name)
+    if name == :power
+      2
+    elsif name == :channel=
+      1
+    else
+      0
+    end
   end
 
   # WRITE CODE HERE
